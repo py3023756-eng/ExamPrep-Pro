@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#030712">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>TargetCrack Exam Vault - Premium Digital Study Platform</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            vault: {
+              950: '#030712',
+              900: '#0b1120',
+              850: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+              accent: '#38bdf8',
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+              rose: '#f43f5e'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Anti-Piracy Document Protection */
+    .unselectable {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    
+    @media print {
+      body { display: none !important; }
+    }
+
+    .scrollbar-none::-webkit-scrollbar { display: none; }
+    .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+    @keyframes watermarkFloat {
+      0% { transform: translate(-20px, -15px) rotate(-25deg); opacity: 0.18; }
+      50% { transform: translate(25px, 20px) rotate(-22deg); opacity: 0.28; }
+      100% { transform: translate(-20px, -15px) rotate(-25deg); opacity: 0.18; }
+    }
+    .watermark-grid {
+      animation: watermarkFloat 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    
+    .glass-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(3, 7, 18, 0.95) 100%);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+
+<body class="bg-vault-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-white unselectable">
+
+  <header class="bg-vault-900/95 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-40 px-4 py-2.5 shadow-xl">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center space-x-2.5 cursor-pointer" onclick="navigateToTab('home')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-sky-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 text-white font-black font-display text-lg tracking-wider">
+          TC
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-base font-black font-display text-white tracking-tight">TargetCrack</span>
+            <span class="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Vault Pro</span>
+          </div>
+          <p class="text-[10px] text-slate-400">All India Competitive Exam Hub</p>
+        </div>
+      </div>
+
+      <!-- Action Nav -->
+      <div class="flex items-center space-x-2">
+        <button id="pwaInstallBtn" onclick="triggerPwaPrompt()" class="hidden text-xs bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/40 px-2.5 py-1.5 rounded-xl font-semibold transition flex items-center gap-1">
+          <i class="fas fa-download text-xs"></i>
+          <span class="hidden sm:inline">Install App</span>
+        </button>
+
+        <div id="headerAuthSection" class="flex items-center gap-2">
+          <!-- Populated by JS based on user state -->
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="graceAccessAlertBar" class="hidden bg-gradient-to-r from-amber-600/30 via-amber-500/20 to-amber-600/30 border-b border-amber-500/40 px-4 py-2.5">
+    <div class="max-w-4xl mx-auto flex items-center justify-between text-xs text-amber-200">
+      <div class="flex items-center space-x-2">
+        <span class="flex h-2.5 w-2.5 relative shrink-0">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+        </span>
+        <p class="font-medium">
+          <strong class="text-white">Provisional Access Active:</strong> Verifying Payment Proof. Auto expires in: <span id="graceCountdownTimer" class="font-mono font-bold text-amber-300 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-500/30">11h 59m 50s</span>
+        </p>
+      </div>
+      <button onclick="document.getElementById('graceAccessAlertBar').classList.add('hidden')" class="text-amber-400 hover:text-white text-xs ml-2">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <main class="flex-1 max-w-4xl w-full mx-auto p-4 pb-28 space-y-5">
+    
+    <!-- TAB 1: HOME & AUTOMATED CURRENT AFFAIRS ENGINE -->
+    <section id="tabHomeSection" class="space-y-5">
+      
+      <!-- Welcome Hero Banner -->
+      <div class="glass-card rounded-3xl p-5 sm:p-6 border border-slate-800 shadow-2xl relative overflow-hidden">
+        <div class="absolute -right-16 -top-16 w-52 h-52 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-16 -bottom-16 w-52 h-52 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
+              <i class="fas fa-bolt text-yellow-400"></i> Live Exam AI Updates
+            </span>
+            <span id="userExamTag" class="text-xs text-slate-300 bg-slate-800 px-3 py-1 rounded-full border border-slate-700 font-medium">
+              Target: All Competitive Exams
+            </span>
+          </div>
+
+          <h1 class="text-xl sm:text-2xl font-black font-display text-white tracking-tight leading-snug">
+            Crack Your Exam With Topper Formula Books, PYQs & Verified Capsules.
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-2xl">
+            Read in-app anytime without heavy downloads. Secure, anti-piracy protected, and updated automatically with daily PIB summaries.
+          </p>
+
+          <div class="pt-1 flex flex-wrap items-center gap-3">
+            <button onclick="navigateToTab('store')" class="bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-cyan-500/20 transition active:scale-95 flex items-center gap-1.5">
+              <i class="fas fa-folder-open"></i>
+              <span>Explore Notes Vault</span>
+            </button>
+            <button onclick="navigateToTab('quiz')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-700 transition active:scale-95 flex items-center gap-1.5">
+              <i class="fas fa-circle-question text-cyan-400"></i>
+              <span>Daily Practice MCQs</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Automated Live Current Affairs Widget -->
+      <div class="glass-card rounded-3xl p-5 border border-slate-800 shadow-xl space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+          <div>
+            <h2 class="text-sm font-extrabold font-display uppercase tracking-wider text-white flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+              <span>Automated Exam Current Affairs & PIB Feed</span>
+            </h2>
+            <p class="text-[11px] text-slate-400">Zero manual effort • Self-refreshed for UPSC, SSC, Railways, State PSC</p>
+          </div>
+
+          <!-- Time Range Filters -->
+          <div class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800 self-start sm:self-center">
+            <button onclick="switchAffairsFilter('daily')" id="filterDailyBtn" class="px-3 py-1 text-xs font-bold rounded-lg bg-cyan-500 text-slate-950 transition">Daily</button>
+            <button onclick="switchAffairsFilter('weekly')" id="filterWeeklyBtn" class="px-3 py-1 text-xs font-medium text-slate-400 hover:text-white rounded-lg transition">Weekly</button>
+            <button onclick="switchAffairsFilter('monthly')" id="filterMonthlyBtn" class="px-3 py-1 text-xs font-medium text-slate-400 hover:text-white rounded-lg transition">Monthly</button>
+          </div>
+        </div>
+
+        <div id="affairsFeedList" class="space-y-2.5 max-h-[380px] overflow-y-auto pr-1 scrollbar-none">
+          <!-- Dynamic News Items Inserted by JS -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 2: STUDY VAULT & EXAM MATERIAL STORE -->
+    <section id="tabStoreSection" class="hidden space-y-5">
+      
+      <!-- Store Filters Bar -->
+      <div class="glass-card rounded-2xl p-4 border border-slate-800 space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-base font-black font-display text-white flex items-center gap-2">
+              <i class="fas fa-boxes-stacked text-cyan-400"></i>
+              <span>Exam Notes & PYQ Store</span>
+            </h2>
+            <p class="text-xs text-slate-400">Read in secure in-app viewer. First 3 pages free preview on all titles.</p>
+          </div>
+
+          <!-- Search Input -->
+          <div class="relative">
+            <i class="fas fa-search absolute left-3 top-2.5 text-xs text-slate-500"></i>
+            <input type="text" id="storeSearchInput" onkeyup="filterStoreMaterials()" placeholder="Search notes, PYQs, exam..." class="bg-slate-950 border border-slate-800 text-xs text-slate-200 pl-8 pr-3 py-2 rounded-xl w-full sm:w-64 focus:border-cyan-400 outline-none">
+          </div>
+        </div>
+
+        <!-- Exam Category Pill Filters -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none text-xs">
+          <button onclick="filterStoreCategory('ALL')" class="store-filter-btn px-3 py-1.5 rounded-xl font-bold bg-cyan-500 text-slate-950 shrink-0">All Titles</button>
+          <button onclick="filterStoreCategory('SSC')" class="store-filter-btn px-3 py-1.5 rounded-xl font-medium bg-slate-900 border border-slate-800 text-slate-300 shrink-0">SSC (CGL/GD/CHSL)</button>
+          <button onclick="filterStoreCategory('POLICE')" class="store-filter-btn px-3 py-1.5 rounded-xl font-medium bg-slate-900 border border-slate-800 text-slate-300 shrink-0">State Police (UP/Bihar)</button>
+          <button onclick="filterStoreCategory('RAILWAY')" class="store-filter-btn px-3 py-1.5 rounded-xl font-medium bg-slate-900 border border-slate-800 text-slate-300 shrink-0">Railways RRB</button>
+          <button onclick="filterStoreCategory('DEFENCE')" class="store-filter-btn px-3 py-1.5 rounded-xl font-medium bg-slate-900 border border-slate-800 text-slate-300 shrink-0">Defence (NDA/CDS)</button>
+          <button onclick="filterStoreCategory('GK')" class="store-filter-btn px-3 py-1.5 rounded-xl font-medium bg-slate-900 border border-slate-800 text-slate-300 shrink-0">Static GK & Formulas</button>
+        </div>
+      </div>
+
+      <!-- Store Material Grid -->
+      <div id="storeCardsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- TAB 3: DAILY PRACTICE QUIZ WITH DETAILED EXPLANATIONS -->
+    <section id="tabQuizSection" class="hidden space-y-4">
+      <div class="glass-card rounded-3xl p-5 border border-slate-800">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+          <div>
+            <h2 class="text-base font-black font-display text-white flex items-center gap-2">
+              <i class="fas fa-brain text-cyan-400"></i>
+              <span>Daily High-Yield MCQ Challenge</span>
+            </h2>
+            <p class="text-xs text-slate-400">Practice real exam-pattern questions with instant explanations</p>
+          </div>
+          <div class="text-right">
+            <span id="quizScoreBadge" class="text-xs font-mono font-bold bg-cyan-950 text-cyan-300 px-3 py-1 rounded-xl border border-cyan-800">Score: 0 / 5</span>
+          </div>
+        </div>
+
+        <div id="quizQuestionsContainer" class="space-y-4">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: MY PURCHASED LIBRARY VAULT -->
+    <section id="tabMyLibrarySection" class="hidden space-y-4">
+      <div class="glass-card rounded-3xl p-5 border border-slate-800">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+          <div>
+            <h2 class="text-base font-black font-display text-white flex items-center gap-2">
+              <i class="fas fa-bookmark text-emerald-400"></i>
+              <span>My Enrolled Vault & Active Passes</span>
+            </h2>
+            <p class="text-xs text-slate-400">Your unlocked and provisional notes ready for reading</p>
+          </div>
+        </div>
+
+        <div id="myLibraryListContainer" class="space-y-3">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="fixed bottom-0 left-0 right-0 bg-vault-900/95 backdrop-blur-md border-t border-slate-800 py-2 px-4 z-30">
+    <div class="max-w-md mx-auto flex items-center justify-around">
+      <button onclick="navigateToTab('home')" id="bottomNavHome" class="flex flex-col items-center gap-0.5 text-cyan-400 transition">
+        <i class="fas fa-house text-base"></i>
+        <span class="text-[10px] font-bold">Feed</span>
+      </button>
+
+      <button onclick="navigateToTab('store')" id="bottomNavStore" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-200 transition">
+        <i class="fas fa-store text-base"></i>
+        <span class="text-[10px] font-medium">Notes Vault</span>
+      </button>
+
+      <button onclick="navigateToTab('quiz')" id="bottomNavQuiz" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-200 transition">
+        <i class="fas fa-circle-question text-base"></i>
+        <span class="text-[10px] font-medium">Daily MCQs</span>
+      </button>
+
+      <button onclick="navigateToTab('mylibrary')" id="bottomNavLibrary" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-200 transition">
+        <i class="fas fa-book-bookmark text-base"></i>
+        <span class="text-[10px] font-medium">My Shelf</span>
+      </button>
+
+      <button onclick="openAdminGatewayModal()" class="flex flex-col items-center gap-0.5 text-slate-500 hover:text-amber-400 transition">
+        <i class="fas fa-shield-halved text-base"></i>
+        <span class="text-[10px] font-medium">Admin</span>
+      </button>
+    </div>
+  </nav>
+
+  <div id="secureReaderModal" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex flex-col hidden select-none">
+    
+    <!-- Reader Top Navigation Bar -->
+    <div class="bg-vault-900 border-b border-slate-800 px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3 overflow-hidden">
+        <button onclick="closeSecureReader()" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">
+          <i class="fas fa-arrow-left text-xs"></i>
+        </button>
+        <div>
+          <h3 id="readerDocTitle" class="text-xs sm:text-sm font-bold text-white truncate max-w-xs sm:max-w-md">Document Title</h3>
+          <p id="readerAccessStatusBadge" class="text-[10px] text-emerald-400 flex items-center gap-1">
+            <i class="fas fa-lock-open text-[9px]"></i> Free 3-Page Preview Mode
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <span id="readerPageIndicator" class="text-xs font-mono font-bold bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 text-cyan-300">
+          Page 1 / 3
+        </span>
+        <button onclick="triggerReaderBuyPrompt()" id="readerUnlockFullBtn" class="text-xs bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 text-slate-950 font-black px-3 py-1.5 rounded-xl shadow-md transition">
+          Unlock Full (₹29)
+        </button>
+      </div>
+    </div>
+
+    <!-- Reader Anti-Piracy Document Viewport with Canvas Canvas Simulation -->
+    <div class="flex-1 overflow-y-auto p-4 flex justify-center items-start bg-slate-950 relative">
+      
+      <!-- Anti-Piracy Watermark Overlay (Displays Student Name & Phone Diagonally) -->
+      <div id="readerWatermarkContainer" class="absolute inset-0 z-20 pointer-events-none flex flex-wrap justify-around items-around opacity-25 overflow-hidden">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- Document Page Sheet -->
+      <div class="max-w-xl w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative z-10 space-y-5 text-slate-200">
+        
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono font-bold text-cyan-400">TargetCrack Certified Study Content</span>
+          </div>
+          <span class="text-[10px] text-slate-500 font-mono" id="readerDocSubject">Subject</span>
+        </div>
+
+        <div id="readerPageContentArea" class="space-y-4 text-xs sm:text-sm leading-relaxed">
+          <!-- Page text rendered by JS -->
+        </div>
+
+        <!-- Locked Page Overlay (Shown after Page 3 if unpaid) -->
+        <div id="readerLockedOverlay" class="hidden rounded-2xl bg-gradient-to-b from-slate-900/90 to-slate-950 p-6 border border-cyan-500/40 text-center space-y-3 mt-4">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl">
+            <i class="fas fa-lock"></i>
+          </div>
+          <h4 class="text-sm font-extrabold text-white">Remaining 42 Pages Are Locked</h4>
+          <p class="text-xs text-slate-400 max-w-sm mx-auto">
+            You have reached the end of the free 3-page preview. Unlock permanent full access or instant 12-hour grace review for just ₹29.
+          </p>
+          <button onclick="openPaymentModalForCurrentDoc()" class="py-2.5 px-6 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 text-white font-extrabold text-xs rounded-xl shadow-lg transition active:scale-95">
+            <i class="fas fa-unlock-keyhole mr-1"></i> Unlock Full Document (₹29)
+          </button>
+        </div>
+
+        <!-- Page Switchers -->
+        <div class="flex items-center justify-between pt-4 border-t border-slate-800">
+          <button onclick="prevReaderPage()" id="readerPrevBtn" class="text-xs px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold transition disabled:opacity-40">
+            <i class="fas fa-chevron-left mr-1"></i> Previous Page
+          </button>
+          <button onclick="nextReaderPage()" id="readerNextBtn" class="text-xs px-3 py-1.5 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-bold transition disabled:opacity-40">
+            Next Page <i class="fas fa-chevron-right ml-1"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="paymentProofModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-4">
+      <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="flex items-center space-x-2.5">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg font-black">
+          <i class="fas fa-qrcode"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-extrabold text-white">Instant UPI Pay & 12h Grace Unlock</h3>
+          <p class="text-xs text-slate-400">Zero wait: Get immediate 12-hour access upon upload</p>
+        </div>
+      </div>
+
+      <!-- Item Details & Amount -->
+      <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center justify-between">
+        <div>
+          <p class="text-xs font-bold text-white truncate max-w-[200px]" id="payItemTitle">Title Name</p>
+          <p class="text-[10px] text-emerald-400 font-medium">Includes 12h Provisional Access + Lifetime Backup</p>
+        </div>
+        <div class="text-right">
+          <span class="text-lg font-black font-display text-cyan-300" id="payItemPrice">₹29</span>
+        </div>
+      </div>
+
+      <!-- Official QR Section -->
+      <div class="bg-white p-4 rounded-2xl max-w-[210px] mx-auto text-center shadow-lg">
+        <!-- SVG Generated QR code visual representation -->
+        <svg class="w-full h-auto" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" fill="white"/>
+          <!-- Position Marks -->
+          <rect x="5" y="5" width="26" height="26" fill="#091e3a"/>
+          <rect x="9" y="9" width="18" height="18" fill="white"/>
+          <rect x="13" y="13" width="10" height="10" fill="#091e3a"/>
+          
+          <rect x="69" y="5" width="26" height="26" fill="#091e3a"/>
+          <rect x="73" y="9" width="18" height="18" fill="white"/>
+          <rect x="77" y="13" width="10" height="10" fill="#091e3a"/>
+
+          <rect x="5" y="69" width="26" height="26" fill="#091e3a"/>
+          <rect x="9" y="73" width="18" height="18" fill="white"/>
+          <rect x="13" y="77" width="10" height="10" fill="#091e3a"/>
+
+          <!-- Dynamic QR Dots -->
+          <rect x="36" y="10" width="5" height="5" fill="#091e3a"/>
+          <rect x="45" y="15" width="5" height="5" fill="#091e3a"/>
+          <rect x="55" y="10" width="5" height="5" fill="#091e3a"/>
+          <rect x="40" y="35" width="20" height="6" fill="#091e3a"/>
+          <rect x="35" y="50" width="8" height="8" fill="#091e3a"/>
+          <rect x="50" y="50" width="8" height="8" fill="#091e3a"/>
+          <rect x="65" y="45" width="6" height="25" fill="#091e3a"/>
+          <rect x="45" y="65" width="15" height="5" fill="#091e3a"/>
+          <rect x="35" y="75" width="8" height="15" fill="#091e3a"/>
+          <rect x="50" y="80" width="15" height="10" fill="#091e3a"/>
+          <rect x="75" y="75" width="15" height="15" fill="#091e3a"/>
+        </svg>
+        <p class="text-[10px] text-slate-800 font-bold mt-1 font-mono">Scan to Pay: 9140176272@upi</p>
+      </div>
+
+      <!-- Quick UPI Intent App Buttons -->
+      <div class="grid grid-cols-3 gap-2">
+        <a id="intentGPayBtn" href="upi://pay?pa=9140176272@upi&pn=TargetCrack&cu=INR" class="p-2 rounded-xl bg-slate-950 border border-slate-800 text-center hover:border-cyan-400 transition">
+          <i class="fab fa-google-pay text-base text-cyan-400"></i>
+          <span class="block text-[10px] text-slate-300 font-medium">GPay</span>
+        </a>
+        <a id="intentPhonePeBtn" href="upi://pay?pa=9140176272@upi&pn=TargetCrack&cu=INR" class="p-2 rounded-xl bg-slate-950 border border-slate-800 text-center hover:border-cyan-400 transition">
+          <i class="fas fa-mobile-screen-button text-base text-indigo-400"></i>
+          <span class="block text-[10px] text-slate-300 font-medium">PhonePe</span>
+        </a>
+        <a id="intentPaytmBtn" href="upi://pay?pa=9140176272@upi&pn=TargetCrack&cu=INR" class="p-2 rounded-xl bg-slate-950 border border-slate-800 text-center hover:border-cyan-400 transition">
+          <i class="fas fa-wallet text-base text-sky-400"></i>
+          <span class="block text-[10px] text-slate-300 font-medium">Paytm</span>
+        </a>
+      </div>
+
+      <!-- Proof Submission Form -->
+      <form onsubmit="submitPaymentProof(event)" class="space-y-3 pt-2 border-t border-slate-800">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">12-Digit UTR / Transaction ID *</label>
+          <input type="text" id="inputPayUtr" required pattern="[0-9]{12}" maxlength="12" placeholder="e.g. 428901847291" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-cyan-400 font-mono tracking-wider">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Payment Screenshot *</label>
+          <input type="file" id="inputPayScreenshot" accept="image/*" required onchange="handleScreenshotUpload(event)" class="w-full text-xs text-slate-400 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-slate-800 file:text-cyan-300 hover:file:bg-slate-700">
+          <div id="screenshotPreviewBox" class="mt-2 hidden">
+            <img id="screenshotPreviewImg" src="" alt="Proof Preview" class="h-20 w-auto rounded-lg border border-slate-700 object-cover">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 text-white font-black text-xs rounded-xl shadow-lg transition active:scale-95 flex items-center justify-center gap-2">
+          <i class="fas fa-shield-check"></i>
+          <span>Submit Proof & Activate 12h Access</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="authModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full p-6 shadow-2xl relative space-y-4">
+      <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <!-- Step 1: Login / Phone OTP -->
+      <div id="authPhoneStep" class="space-y-4">
+        <div class="text-center">
+          <div class="w-12 h-12 mx-auto mb-2 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <h3 class="text-base font-black text-white">Student Login / Sign Up</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Secure OTP authentication for notes & quiz access</p>
+        </div>
+
+        <!-- Simulated Google Sign-In -->
+        <button onclick="handleGoogleLoginMock()" class="w-full py-2.5 bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
+          <i class="fab fa-google text-red-500"></i>
+          <span>Continue with Google</span>
+        </button>
+
+        <div class="flex items-center gap-2 text-[10px] text-slate-500 uppercase tracking-widest justify-center">
+          <span class="h-px bg-slate-800 flex-1"></span>
+          <span>Or via phone OTP</span>
+          <span class="h-px bg-slate-800 flex-1"></span>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Mobile Number (10 Digits)</label>
+          <div class="flex gap-2">
+            <span class="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-slate-400 flex items-center">+91</span>
+            <input type="tel" id="authInputPhone" maxlength="10" placeholder="9231XXXX61" class="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-cyan-400 font-mono">
+          </div>
+        </div>
+
+        <button onclick="requestPhoneOtp()" class="w-full py-2.5 bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-black text-xs rounded-xl transition active:scale-95">
+          Send Verification Code (OTP)
+        </button>
+      </div>
+
+      <!-- Step 2: OTP Verification -->
+      <div id="authOtpStep" class="hidden space-y-4">
+        <div class="text-center">
+          <h3 class="text-sm font-black text-white">Verify 6-Digit OTP</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Code sent to: <span id="otpRecipientPhone" class="font-mono text-cyan-400">+91 9231XXXX61</span></p>
+        </div>
+
+        <div class="bg-cyan-950/40 border border-cyan-800/60 p-2.5 rounded-xl text-center">
+          <p class="text-[11px] text-cyan-300">Demo Code: <strong class="font-mono text-white text-sm" id="demoOtpDisplay">749201</strong></p>
+        </div>
+
+        <div>
+          <input type="text" id="authInputOtpCode" maxlength="6" placeholder="Enter 6-Digit OTP" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-center text-lg tracking-widest text-white outline-none focus:border-cyan-400 font-mono">
+        </div>
+
+        <button onclick="verifyPhoneOtpCode()" class="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs rounded-xl transition active:scale-95">
+          Verify & Continue
+        </button>
+
+        <p class="text-[10px] text-slate-500 text-center">
+          Did not receive? <button onclick="requestPhoneOtp()" class="text-cyan-400 hover:underline">Resend OTP</button>
+        </p>
+      </div>
+
+      <!-- Step 3: Onboarding Questionnaire for New Students -->
+      <div id="authOnboardingStep" class="hidden space-y-3">
+        <div class="text-center pb-2 border-b border-slate-800">
+          <h3 class="text-sm font-black text-white">Student Study Profile</h3>
+          <p class="text-[11px] text-slate-400">Personalize your exam feed & watermarked reader</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Full Name *</label>
+          <input type="text" id="onboardName" required placeholder="e.g. Shreyansh" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-cyan-400">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Target Exam *</label>
+          <select id="onboardTargetExam" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-cyan-400">
+            <option value="SSC (CGL/CHSL/GD)">SSC (CGL / CHSL / GD)</option>
+            <option value="State Police (UP/Bihar)">State Police (UP / Bihar Constable & SI)</option>
+            <option value="Railways (RRB NTPC/Group D)">Railways (RRB NTPC / Group D)</option>
+            <option value="Banking (IBPS/SBI PO)">Banking (IBPS / SBI Clerk & PO)</option>
+            <option value="Defence (NDA/CDS/Agniveer)">Defence (NDA / CDS / Agniveer)</option>
+            <option value="State PSC / General Prep">State PSC & General Civil Services</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Study Medium</label>
+            <select id="onboardMedium" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-cyan-400">
+              <option value="Hindi">Hindi Medium</option>
+              <option value="English">English Medium</option>
+              <option value="Bilingual">Bilingual</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Stage</label>
+            <select id="onboardStage" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-cyan-400">
+              <option value="Beginner">Beginner</option>
+              <option value="Revision/Mocks">Revision & Mocks</option>
+              <option value="Repeater">Advanced</option>
+            </select>
+          </div>
+        </div>
+
+        <button onclick="finishOnboardingProfile()" class="w-full py-2.5 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 text-slate-950 font-black text-xs rounded-xl shadow-lg transition active:scale-95">
+          Save Profile & Access Vault
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="adminPanelModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-xl w-full p-6 shadow-2xl relative space-y-4 max-h-[90vh] flex flex-col">
+      <button onclick="closeAdminPanelModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <!-- Admin Pass Gate -->
+      <div id="adminPasswordGate" class="space-y-3 py-6 text-center">
+        <div class="w-12 h-12 mx-auto rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl">
+          <i class="fas fa-shield-halved"></i>
+        </div>
+        <h3 class="text-base font-extrabold text-white">TargetCrack Super Admin</h3>
+        <p class="text-xs text-slate-400">Restricted area: 1-click payment proof approvals & vault oversight</p>
+        
+        <div class="max-w-xs mx-auto space-y-2">
+          <input type="password" id="adminSecretKeyInput" placeholder="Enter Admin Password..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-amber-400 text-center tracking-widest">
+          <p id="adminGateError" class="text-xs text-rose-400 hidden">Incorrect password! Please try again.</p>
+          <button onclick="verifyAdminPassword()" class="w-full py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-xl transition">
+            Unlock Admin Console
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin Real Dashboard View -->
+      <div id="adminDashboardContent" class="hidden space-y-4 flex-1 overflow-y-auto pr-1 scrollbar-none">
+        
+        <!-- Metric Cards -->
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <div class="bg-slate-950 p-2.5 rounded-2xl border border-slate-800">
+            <p class="text-[10px] text-slate-400 uppercase font-bold">Pending Proofs</p>
+            <p class="text-base font-black text-amber-400 mt-0.5" id="adminMetricPendingCount">0</p>
+          </div>
+          <div class="bg-slate-950 p-2.5 rounded-2xl border border-slate-800">
+            <p class="text-[10px] text-slate-400 uppercase font-bold">Approved Orders</p>
+            <p class="text-base font-black text-emerald-400 mt-0.5" id="adminMetricApprovedCount">0</p>
+          </div>
+          <div class="bg-slate-950 p-2.5 rounded-2xl border border-slate-800">
+            <p class="text-[10px] text-slate-400 uppercase font-bold">Total Revenue</p>
+            <p class="text-base font-black text-cyan-400 mt-0.5" id="adminMetricTotalRevenue">₹0</p>
+          </div>
+        </div>
+
+        <!-- Verification Queue List -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider">Payment Verification Queue</h4>
+            <span class="text-[10px] text-slate-400">Review UTR & screenshot</span>
+          </div>
+
+          <div id="adminProofQueueList" class="space-y-2.5">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Quick Backup Export -->
+        <div class="pt-2 border-t border-slate-800 flex justify-between items-center text-xs">
+          <span class="text-slate-400">TargetCrack Database Engine</span>
+          <button onclick="exportPlatformDataBackup()" class="text-slate-300 hover:text-white bg-slate-800 px-3 py-1 rounded-lg border border-slate-700">
+            <i class="fas fa-download mr-1"></i> Export Data
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================
+       TARGETCRACK EXAM VAULT - PRODUCTION JAVASCRIPT ENGINE
+       ========================================================== */
+
+    const PLATFORM_CONFIG = {
+      name: "TargetCrack Exam Vault",
+      adminPass: "Akhil@9140",
+      upiId: "9140176272@upi",
+      graceDurationHours: 12
+    };
+
+    // Starter Mock Current Affairs Feed
+    const DEFAULT_AFFAIRS = [
+      {
+        id: "ca_1",
+        range: "daily",
+        title: "Union Cabinet approves new PM-Vidyalaxmi financial assistance scheme for higher education.",
+        source: "PIB Delhi • Education & Schemes",
+        date: "Today, 08:30 AM",
+        summary: "Collateral-free, guarantor-free education loan support for students admitted to top 860 HEIs in India.",
+        relevance: "High for UPSC, SSC CGL & State PCS"
+      },
+      {
+        id: "ca_2",
+        range: "daily",
+        title: "India successfully flight-tests new generation VSHORADS missile at Chandipur.",
+        source: "DRDO / Defence Ministry",
+        date: "Today, 07:15 AM",
+        summary: "4th generation Very Short Range Air Defence System designed to neutralize low-altitude aerial threats.",
+        relevance: "Crucial for NDA, CDS & CAPF Exams"
+      },
+      {
+        id: "ca_3",
+        range: "weekly",
+        title: "ISRO launches Proba-3 Solar Mission in collaboration with European Space Agency (ESA).",
+        source: "ISRO Science Portal",
+        date: "3 Days ago",
+        summary: "Precision formation flying satellites designed to study the Sun's faint outer corona without atmospheric glare.",
+        relevance: "Science & Tech for SSC, Railway NTPC"
+      },
+      {
+        id: "ca_4",
+        range: "weekly",
+        title: "National Highway Authority achieves 100% GIS mapping of Bharatmala expressway corridors.",
+        source: "Ministry of Road Transport",
+        date: "5 Days ago",
+        summary: "Integrated logistics efficiency improved with digital tracking and FASTag-based geo-fencing.",
+        relevance: "Economy & Infrastructure"
+      },
+      {
+        id: "ca_5",
+        range: "monthly",
+        title: "RBI issues guidelines for Cross-Border UPI integration across ASEAN and Gulf corridors.",
+        source: "Reserve Bank of India",
+        date: "12 Days ago",
+        summary: "Enables instant peer-to-merchant cross-currency remittances with reduced transaction spreads.",
+        relevance: "Banking, IBPS PO & SBI Exams"
+      }
+    ];
+
+    // Starter Mock Store Products
+    const DEFAULT_STORE_ITEMS = [
+      {
+        id: "doc_1",
+        title: "Top 500 Static GK & Constitution Formula Capsule",
+        category: "GK",
+        pages: 64,
+        price: 29,
+        badge: "Bestseller",
+        tag: "All Competitive Exams",
+        description: "Handwritten memory mnemonics for Articles, Schedules, Rivers, National Parks and Battles.",
+        previewPages: [
+          "Page 1: Indian Constitution - High Yield Articles (Article 14 to 32 Fundamental Rights, Writs mnemonics: Habeas Corpus, Mandamus, Quo-Warranto explained with visual memory tricks).",
+          "Page 2: Important Amendments - 42nd Amendment 1976 (Mini Constitution additions: Socialist, Secular, Integrity), 44th Amendment (Right to Property made legal right Article 300A).",
+          "Page 3: Major River Basins - Himalayan vs Peninsular Rivers. Tributary shortcut tables: Ganga (Ramganga, Gomti, Ghaghara, Gandak, Kosi) & Yamuna (Chambal, Sindh, Betwa, Ken)."
+        ]
+      },
+      {
+        id: "doc_2",
+        title: "UP Police Constable & SI: 10 Year Solved PYQ Compilation",
+        category: "POLICE",
+        pages: 88,
+        price: 39,
+        badge: "Verified Solutions",
+        tag: "UP Police 2026 Special",
+        description: "Previous year question papers with step-by-step Hindi explanations and expected cutoff trends.",
+        previewPages: [
+          "Page 1: General Hindi Section - Sandhi, Samas, Tatsam-Tadbhav quick identification rules with 50 previous exam questions.",
+          "Page 2: General Knowledge & Law - Internal Security, Cyber Crime, Human Rights and UP State specific geography.",
+          "Page 3: Mental Ability & Reasoning - Blood relation shortcuts, Coding-Decoding tricks with 20-second solving formulas."
+        ]
+      },
+      {
+        id: "doc_3",
+        title: "SSC CGL / CHSL: Quantitative Aptitude Speed Math Sheet",
+        category: "SSC",
+        pages: 52,
+        price: 29,
+        badge: "Speed Hacks",
+        tag: "TCS Pattern Verified",
+        description: "All geometry, algebra, trigonometry and percentage fractional conversion tables.",
+        previewPages: [
+          "Page 1: Fraction to Percentage Mastery - 1/7 to 1/19 rapid conversion table and successive percentage shortcuts for CI and Profit-Loss.",
+          "Page 2: Algebra Core Identities - (a+b+c)^3 reductions, condition when a^3+b^3+c^3 = 3abc, symmetric polynomial substitution.",
+          "Page 3: Geometry Circle Theorems - Tangent secant theorem, direct common tangent formula, cyclic quadrilateral properties."
+        ]
+      },
+      {
+        id: "doc_4",
+        title: "Railway RRB NTPC & Group D: General Science Master Mindmap",
+        category: "RAILWAY",
+        pages: 72,
+        price: 39,
+        badge: "NCERT Class 9-10",
+        tag: "Physics, Chem, Bio",
+        description: "Physics numericals shortcut formulas, chemistry chemical names & biology organ systems.",
+        previewPages: [
+          "Page 1: Physics Mechanics - Work, Energy, Power numerical formulas; Mirror & Lens focal length sign conventions.",
+          "Page 2: Chemistry Compounds - Common names of compounds (Baking Soda, Washing Soda, Bleaching Powder, Plaster of Paris).",
+          "Page 3: Human Circulatory & Nervous System - Heart chambers, blood groups (Universal Donor O-, Recipient AB+), brain lobular functions."
+        ]
+      }
+    ];
+
+    // Starter MCQs
+    const DEFAULT_MCQS = [
+      {
+        id: "q_1",
+        question: "Under which Article of the Indian Constitution is the 'Right to Constitutional Remedies' guaranteed?",
+        options: ["Article 19", "Article 21", "Article 32", "Article 44"],
+        correctIndex: 2,
+        explanation: "Dr. B.R. Ambedkar called Article 32 the 'Heart and Soul' of the Constitution as it empowers citizens to approach the Supreme Court directly for the enforcement of Fundamental Rights via 5 Writs."
+      },
+      {
+        id: "q_2",
+        question: "Which of the following is the highest peak in the Western Ghats (Sahyadri)?",
+        options: ["Doda Betta", "Anamudi", "Guru Shikhar", "Mahendragiri"],
+        correctIndex: 1,
+        explanation: "Anamudi (2,695 metres), located in the Anaimalai Hills of Kerala, is the highest peak in both the Western Ghats and South India."
+      },
+      {
+        id: "q_3",
+        question: "What is the primary function of the 'Stapes' bone in the human body?",
+        options: ["Filtration in Kidneys", "Sound transmission in Middle Ear", "Bile secretion", "Reflex motor action"],
+        correctIndex: 1,
+        explanation: "The Stapes (stirrup) is the smallest bone in the human body located in the middle ear, responsible for transmitting sound vibrations to the inner ear."
+      }
+    ];
+
+    /* Storage Helpers */
+    function loadStorage(key, fallback) {
+      try {
+        const item = localStorage.getItem(`targetcrack_${key}`);
+        return item ? JSON.parse(item) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function saveStorage(key, val) {
+      try {
+        localStorage.setItem(`targetcrack_${key}`, JSON.stringify(val));
+      } catch (e) {
+        console.error("Storage save failed", e);
+      }
+    }
+
+    /* Core Application State */
+    let currentUser = loadStorage('user', null); // { name, phone, email, exam, medium, stage, enrolledDocs: [], provisionalAccess: {} }
+    let paymentProofs = loadStorage('payment_proofs', []); // [ { id, studentName, studentPhone, docId, docTitle, price, utr, screenshotBase64, timestamp, status: 'pending'|'approved'|'rejected' } ]
+    let affairsFeed = loadStorage('affairs', DEFAULT_AFFAIRS);
+    let storeItems = loadStorage('store', DEFAULT_STORE_ITEMS);
+    let mcqBank = loadStorage('mcqs', DEFAULT_MCQS);
+    let activeAffairsFilter = 'daily';
+    let currentStoreFilter = 'ALL';
+
+    // Reader Runtime State
+    let currentReadingDoc = null;
+    let currentReadingPage = 1;
+
+    // Payment Runtime State
+    let pendingPaymentItem = null;
+    let uploadedScreenshotBase64 = null;
+
+    // Auth Runtime State
+    let generatedOtp = "749201";
+
+    /* ==========================================================
+       INITIALIZATION & PWA SETUP
+       ========================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      initAntiPiracyGuards();
+      updateAuthHeaderUI();
+      renderAffairsFeed();
+      renderStoreCards();
+      renderQuizSection();
+      renderMyLibraryList();
+      checkActiveGracePeriods();
+      setupPwaSupport();
+
+      // Check if user has active grace period
+      setInterval(checkActiveGracePeriods, 1000);
+    });
+
+    /* Anti-Piracy Listeners */
+    function initAntiPiracyGuards() {
+      // Disable Context Menu
+      document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        showToast("Right-click & context menu are disabled for document protection.");
+      });
+
+      // Disable keyboard shortcuts: Ctrl+P (Print), Ctrl+S (Save), Ctrl+U (Source), F12 (DevTools)
+      document.addEventListener('keydown', (e) => {
+        if (
+          (e.ctrlKey && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) ||
+          e.key === 'F12'
+        ) {
+          e.preventDefault();
+          showToast("Print, download and inspect shortcuts are restricted.");
+        }
+      });
+    }
+
+    function setupPwaSupport() {
+      let deferredPrompt = null;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        const btn = document.getElementById('pwaInstallBtn');
+        if (btn) btn.classList.remove('hidden');
+      });
+
+      window.triggerPwaPrompt = () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(() => {
+            deferredPrompt = null;
+            document.getElementById('pwaInstallBtn').classList.add('hidden');
+          });
+        } else {
+          showToast("To install, tap browser options (⋮) and choose 'Add to Home screen'.");
+        }
+      };
+    }
+
+    /* ==========================================================
+       NAVIGATION & TABS
+       ========================================================== */
+    function navigateToTab(tabId) {
+      const sections = {
+        home: document.getElementById('tabHomeSection'),
+        store: document.getElementById('tabStoreSection'),
+        quiz: document.getElementById('tabQuizSection'),
+        mylibrary: document.getElementById('tabMyLibrarySection')
+      };
+
+      const navBtns = {
+        home: document.getElementById('bottomNavHome'),
+        store: document.getElementById('bottomNavStore'),
+        quiz: document.getElementById('bottomNavQuiz'),
+        mylibrary: document.getElementById('bottomNavLibrary')
+      };
+
+      Object.keys(sections).forEach(key => {
+        if (sections[key]) sections[key].classList.add('hidden');
+        if (navBtns[key]) {
+          navBtns[key].className = "flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-200 transition";
+        }
+      });
+
+      if (sections[tabId]) sections[tabId].classList.remove('hidden');
+      if (navBtns[tabId]) {
+        navBtns[tabId].className = "flex flex-col items-center gap-0.5 text-cyan-400 transition font-bold";
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ==========================================================
+       AUTHENTICATION & ONBOARDING
+       ========================================================== */
+    function updateAuthHeaderUI() {
+      const authBox = document.getElementById('headerAuthSection');
+      const examTag = document.getElementById('userExamTag');
+
+      if (currentUser) {
+        authBox.innerHTML = `
+          <div class="flex items-center space-x-2">
+            <div class="text-right hidden sm:block">
+              <p class="text-xs font-bold text-white leading-tight">${currentUser.name}</p>
+              <p class="text-[10px] text-emerald-400 font-mono">+91 ${currentUser.phone}</p>
+            </div>
+            <button onclick="handleLogout()" title="Logout" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-rose-500/20 hover:text-rose-400 border border-slate-700 flex items-center justify-center text-slate-300 transition">
+              <i class="fas fa-power-off text-xs"></i>
+            </button>
+          </div>
+        `;
+        if (examTag && currentUser.exam) {
+          examTag.innerText = `Target: ${currentUser.exam}`;
+        }
+      } else {
+        authBox.innerHTML = `
+          <button onclick="openAuthModal()" class="text-xs bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 text-slate-950 font-black px-3.5 py-1.5 rounded-xl shadow-md transition active:scale-95 flex items-center gap-1.5">
+            <i class="fas fa-right-to-bracket text-xs"></i>
+            <span>Login / Register</span>
+          </button>
+        `;
+        if (examTag) {
+          examTag.innerText = `Target: All Competitive Exams`;
+        }
+      }
+    }
+
+    function openAuthModal() {
+      document.getElementById('authModal').classList.remove('hidden');
+      document.getElementById('authPhoneStep').classList.remove('hidden');
+      document.getElementById('authOtpStep').classList.add('hidden');
+      document.getElementById('authOnboardingStep').classList.add('hidden');
+    }
+
+    function closeAuthModal() {
+      document.getElementById('authModal').classList.add('hidden');
+    }
+
+    function requestPhoneOtp() {
+      const phoneInput = document.getElementById('authInputPhone').value.trim();
+      if (!phoneInput || phoneInput.length !== 10) {
+        showToast("Please enter a valid 10-digit mobile number.");
+        return;
+      }
+
+      generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+      document.getElementById('demoOtpDisplay').innerText = generatedOtp;
+      document.getElementById('otpRecipientPhone').innerText = `+91 ${phoneInput}`;
+
+      document.getElementById('authPhoneStep').classList.add('hidden');
+      document.getElementById('authOtpStep').classList.remove('hidden');
+      document.getElementById('authInputOtpCode').value = "";
+      document.getElementById('authInputOtpCode').focus();
+    }
+
+    function verifyPhoneOtpCode() {
+      const enteredOtp = document.getElementById('authInputOtpCode').value.trim();
+      const phone = document.getElementById('authInputPhone').value.trim();
+
+      if (enteredOtp !== generatedOtp && enteredOtp !== "749201") {
+        showToast("Incorrect OTP code entered! Please check the demo code.");
+        return;
+      }
+
+      // Check if existing user exists
+      const existingUser = loadStorage('user', null);
+      if (existingUser && existingUser.phone === phone) {
+        currentUser = existingUser;
+        saveStorage('user', currentUser);
+        closeAuthModal();
+        updateAuthHeaderUI();
+        showToast(`Welcome back, ${currentUser.name}!`);
+      } else {
+        // Proceed to onboarding
+        document.getElementById('authOtpStep').classList.add('hidden');
+        document.getElementById('authOnboardingStep').classList.remove('hidden');
+      }
+    }
+
+    function handleGoogleLoginMock() {
+      // Fast simulation of Google Auth
+      const demoEmail = "student.targetcrack@gmail.com";
+      const demoName = "Shreyansh (Google Verified)";
+      const demoPhone = "9231XXXX61";
+
+      currentUser = {
+        name: demoName,
+        phone: demoPhone,
+        email: demoEmail,
+        exam: "SSC (CGL/CHSL/GD)",
+        medium: "Bilingual",
+        stage: "Revision/Mocks",
+        enrolledDocs: [],
+        provisionalAccess: {}
+      };
+
+      saveStorage('user', currentUser);
+      closeAuthModal();
+      updateAuthHeaderUI();
+      showToast("Logged in successfully with Google account!");
+    }
+
+    function finishOnboardingProfile() {
+      const name = document.getElementById('onboardName').value.trim();
+      const exam = document.getElementById('onboardTargetExam').value;
+      const medium = document.getElementById('onboardMedium').value;
+      const stage = document.getElementById('onboardStage').value;
+      const phone = document.getElementById('authInputPhone').value.trim() || "9231XXXX61";
+
+      if (!name) {
+        showToast("Please enter your full name.");
+        return;
+      }
+
+      currentUser = {
+        name,
+        phone,
+        exam,
+        medium,
+        stage,
+        enrolledDocs: [],
+        provisionalAccess: {}
+      };
+
+      saveStorage('user', currentUser);
+      closeAuthModal();
+      updateAuthHeaderUI();
+      renderStoreCards();
+      showToast(`Welcome ${name}! Your study vault is ready.`);
+    }
+
+    function handleLogout() {
+      if (confirm("Are you sure you want to log out of TargetCrack?")) {
+        currentUser = null;
+        localStorage.removeItem('targetcrack_user');
+        updateAuthHeaderUI();
+        renderMyLibraryList();
+        showToast("Logged out successfully.");
+      }
+    }
+
+    /* ==========================================================
+       AUTOMATED CURRENT AFFAIRS ENGINE
+       ========================================================== */
+    function switchAffairsFilter(range) {
+      activeAffairsFilter = range;
+      document.querySelectorAll('#filterDailyBtn, #filterWeeklyBtn, #filterMonthlyBtn').forEach(b => {
+        b.className = "px-3 py-1 text-xs font-medium text-slate-400 hover:text-white rounded-lg transition";
+      });
+
+      const activeBtn = document.getElementById(`filter${range.charAt(0).toUpperCase() + range.slice(1)}Btn`);
+      if (activeBtn) {
+        activeBtn.className = "px-3 py-1 text-xs font-bold rounded-lg bg-cyan-500 text-slate-950 transition";
+      }
+
+      renderAffairsFeed();
+    }
+
+    function renderAffairsFeed() {
+      const container = document.getElementById('affairsFeedList');
+      if (!container) return;
+
+      const filtered = affairsFeed.filter(item => {
+        if (activeAffairsFilter === 'daily') return item.range === 'daily';
+        if (activeAffairsFilter === 'weekly') return item.range === 'weekly' || item.range === 'daily';
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="p-4 text-center text-xs text-slate-500">No current affairs loaded for this filter.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => `
+        <div class="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800/80 hover:border-slate-700 transition space-y-1.5">
+          <div class="flex items-center justify-between text-[10px]">
+            <span class="font-bold text-cyan-400 flex items-center gap-1">
+              <i class="fas fa-newspaper text-[9px]"></i> ${item.source}
+            </span>
+            <span class="text-slate-500 font-mono">${item.date}</span>
+          </div>
+
+          <h3 class="text-xs sm:text-sm font-bold text-white leading-snug">
+            ${item.title}
+          </h3>
+
+          <p class="text-xs text-slate-400 leading-relaxed">
+            ${item.summary}
+          </p>
+
+          <div class="pt-1 flex items-center justify-between text-[10px] text-slate-500 border-t border-slate-900">
+            <span class="text-emerald-400 font-semibold"><i class="fas fa-check-circle text-[9px]"></i> ${item.relevance}</span>
+            <span class="text-slate-400">TargetCrack Verified</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ==========================================================
+       STORE & MATERIAL VAULT
+       ========================================================== */
+    function filterStoreCategory(cat) {
+      currentStoreFilter = cat;
+      document.querySelectorAll('.store-filter-btn').forEach(btn => {
+        btn.className = "store-filter-btn px-3 py-1.5 rounded-xl font-medium bg-slate-900 border border-slate-800 text-slate-300 shrink-0";
+      });
+
+      event.target.className = "store-filter-btn px-3 py-1.5 rounded-xl font-bold bg-cyan-500 text-slate-950 shrink-0";
+      renderStoreCards();
+    }
+
+    function filterStoreMaterials() {
+      renderStoreCards();
+    }
+
+    function renderStoreCards() {
+      const container = document.getElementById('storeCardsContainer');
+      const search = (document.getElementById('storeSearchInput')?.value || '').toLowerCase();
+
+      let list = storeItems.filter(item => {
+        if (currentStoreFilter !== 'ALL' && item.category !== currentStoreFilter) return false;
+        if (search && !item.title.toLowerCase().includes(search) && !item.description.toLowerCase().includes(search)) return false;
+        return true;
+      });
+
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-2 p-8 text-center text-xs text-slate-500 glass-card rounded-2xl border border-slate-800">No study titles matching your search criteria.</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map(item => {
+        const isPermanentlyEnrolled = currentUser && currentUser.enrolledDocs && currentUser.enrolledDocs.includes(item.id);
+        const hasGrace = isProvisionalActive(item.id);
+
+        let statusBadge = `<span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700 font-medium">${item.pages} Pages • 3p Preview</span>`;
+        if (isPermanentlyEnrolled) {
+          statusBadge = `<span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/40 font-bold"><i class="fas fa-check-circle"></i> Permanent Access</span>`;
+        } else if (hasGrace) {
+          statusBadge = `<span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded border border-amber-500/40 font-bold"><i class="fas fa-clock"></i> 12h Grace Active</span>`;
+        }
+
+        return `
+          <div class="glass-card rounded-2xl p-4 sm:p-5 border border-slate-800 hover:border-slate-700 transition flex flex-col justify-between space-y-3">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-wider bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/80">
+                  ${item.tag}
+                </span>
+                ${statusBadge}
+              </div>
+
+              <h3 class="text-sm font-extrabold text-white leading-snug">
+                ${item.title}
+              </h3>
+
+              <p class="text-xs text-slate-400 line-clamp-2">
+                ${item.description}
+              </p>
+            </div>
+
+            <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
+              <div>
+                <span class="text-xs text-slate-500 font-medium">Price:</span>
+                <span class="text-base font-black font-display text-white ml-1">₹${item.price}</span>
+              </div>
+
+              <div class="flex items-center gap-1.5">
+                <button onclick="openSecureReader('${item.id}', 1)" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl border border-slate-700 transition">
+                  <i class="fas fa-eye mr-1"></i> Read
+                </button>
+
+                ${!isPermanentlyEnrolled ? `
+                  <button onclick="startPaymentFlow('${item.id}')" class="px-3 py-1.5 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 text-slate-950 text-xs font-black rounded-xl transition shadow-sm active:scale-95">
+                    Unlock Full
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* ==========================================================
+       SECURE ANTI-PIRACY IN-APP DOCUMENT READER
+       ========================================================== */
+    function openSecureReader(docId, pageNum = 1) {
+      const doc = storeItems.find(d => d.id === docId);
+      if (!doc) return;
+
+      currentReadingDoc = doc;
+      currentReadingPage = pageNum;
+
+      document.getElementById('readerDocTitle').innerText = doc.title;
+      document.getElementById('readerDocSubject').innerText = doc.tag;
+
+      const modal = document.getElementById('secureReaderModal');
+      modal.classList.remove('hidden');
+
+      renderReaderWatermark();
+      renderReaderPageContent();
+    }
+
+    function closeSecureReader() {
+      document.getElementById('secureReaderModal').classList.add('hidden');
+      currentReadingDoc = null;
+    }
+
+    function renderReaderWatermark() {
+      const watermarkBox = document.getElementById('readerWatermarkContainer');
+      const studentName = currentUser ? currentUser.name : "TargetCrack Guest Student";
+      const studentPhone = currentUser ? `+91 ${currentUser.phone}` : "+91 9231XXXX61";
+
+      const repeatedLabel = `${studentName} • ${studentPhone} • DO NOT SHARE`;
+
+      // Generate watermark pattern overlay
+      let tagsHtml = "";
+      for (let i = 0; i < 18; i++) {
+        tagsHtml += `
+          <div class="watermark-grid p-4 text-[11px] sm:text-xs font-black font-mono text-cyan-400 uppercase tracking-widest pointer-events-none select-none">
+            ${repeatedLabel}
+          </div>
+        `;
+      }
+      watermarkBox.innerHTML = tagsHtml;
+    }
+
+    function renderReaderPageContent() {
+      if (!currentReadingDoc) return;
+
+      const isPerm = currentUser && currentUser.enrolledDocs && currentUser.enrolledDocs.includes(currentReadingDoc.id);
+      const isGrace = isProvisionalActive(currentReadingDoc.id);
+      const isFullUnlocked = isPerm || isGrace;
+
+      const totalPages = isFullUnlocked ? currentReadingDoc.pages : 3;
+      document.getElementById('readerPageIndicator').innerText = `Page ${currentReadingPage} / ${totalPages}`;
+
+      const contentArea = document.getElementById('readerPageContentArea');
+      const lockedOverlay = document.getElementById('readerLockedOverlay');
+      const unlockFullBtn = document.getElementById('readerUnlockFullBtn');
+      const accessBadge = document.getElementById('readerAccessStatusBadge');
+
+      if (isFullUnlocked) {
+        unlockFullBtn.classList.add('hidden');
+        accessBadge.innerHTML = `<span class="text-emerald-400 font-bold"><i class="fas fa-circle-check"></i> ${isPerm ? 'Lifetime Verified Access' : 'Provisional 12h Access Active'}</span>`;
+      } else {
+        unlockFullBtn.classList.remove('hidden');
+        accessBadge.innerHTML = `<span class="text-amber-400 font-medium"><i class="fas fa-lock"></i> Free 3-Page Sample Mode</span>`;
+      }
+
+      // If unpaid and past page 3
+      if (!isFullUnlocked && currentReadingPage > 3) {
+        contentArea.innerHTML = `<p class="text-slate-500 italic">Page content obscured. Please unlock to read all remaining pages.</p>`;
+        lockedOverlay.classList.remove('hidden');
+        document.getElementById('readerNextBtn').disabled = true;
+        return;
+      }
+
+      lockedOverlay.classList.add('hidden');
+      document.getElementById('readerNextBtn').disabled = currentReadingPage >= totalPages;
+      document.getElementById('readerPrevBtn').disabled = currentReadingPage <= 1;
+
+      // Extract mock page text
+      const mockText = currentReadingDoc.previewPages[currentReadingPage - 1] ||
+        `Page ${currentReadingPage}: Detailed high-yield analytical coverage for ${currentReadingDoc.title}. Includes critical theorems, quick solving formulas, and previous exam question analysis with answer keys.`;
+
+      contentArea.innerHTML = `
+        <div class="space-y-4">
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 text-cyan-300 font-bold text-xs">
+            Section ${currentReadingPage}: Core Examination Concepts & Tricks
+          </div>
+          <p class="text-slate-300 leading-relaxed font-sans text-xs sm:text-sm">
+            ${mockText}
+          </p>
+          <div class="p-4 rounded-xl bg-slate-950/70 border border-slate-800 text-slate-400 text-xs space-y-2">
+            <p class="font-bold text-white flex items-center gap-1.5">
+              <i class="fas fa-lightbulb text-yellow-400"></i> Examiner's Pro-Tip:
+            </p>
+            <p>Always solve time-consuming questions in Round 2. Mark this concept for direct revision 24 hours prior to your exam date.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function nextReaderPage() {
+      if (currentReadingPage < (isProvisionalActive(currentReadingDoc?.id) || (currentUser?.enrolledDocs?.includes(currentReadingDoc?.id)) ? currentReadingDoc.pages : 4)) {
+        currentReadingPage++;
+        renderReaderPageContent();
+      }
+    }
+
+    function prevReaderPage() {
+      if (currentReadingPage > 1) {
+        currentReadingPage--;
+        renderReaderPageContent();
+      }
+    }
+
+    function triggerReaderBuyPrompt() {
+      if (currentReadingDoc) {
+        startPaymentFlow(currentReadingDoc.id);
+      }
+    }
+
+    function openPaymentModalForCurrentDoc() {
+      if (currentReadingDoc) {
+        startPaymentFlow(currentReadingDoc.id);
+      }
+    }
+
+    /* ==========================================================
+       PAYMENT & 12-HOUR GRACE ACCESS ENGINE
+       ========================================================== */
+    function startPaymentFlow(docId) {
+      if (!currentUser) {
+        showToast("Please login or create your profile first.");
+        openAuthModal();
+        return;
+      }
+
+      const item = storeItems.find(d => d.id === docId);
+      if (!item) return;
+
+      pendingPaymentItem = item;
+      document.getElementById('payItemTitle').innerText = item.title;
+      document.getElementById('payItemPrice').innerText = `₹${item.price}`;
+      document.getElementById('inputPayUtr').value = "";
+      document.getElementById('inputPayScreenshot').value = "";
+      document.getElementById('screenshotPreviewBox').classList.add('hidden');
+      uploadedScreenshotBase64 = null;
+
+      // Update deep-links for UPI Apps with proper amount
+      const upiUrl = `upi://pay?pa=${PLATFORM_CONFIG.upiId}&pn=TargetCrack&am=${item.price}&cu=INR&tn=${encodeURIComponent(item.title)}`;
+      document.getElementById('intentGPayBtn').href = upiUrl;
+      document.getElementById('intentPhonePeBtn').href = upiUrl;
+      document.getElementById('intentPaytmBtn').href = upiUrl;
+
+      document.getElementById('paymentProofModal').classList.remove('hidden');
+    }
+
+    function closePaymentModal() {
+      document.getElementById('paymentProofModal').classList.add('hidden');
+      pendingPaymentItem = null;
+    }
+
+    function handleScreenshotUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        uploadedScreenshotBase64 = evt.target.result;
+        document.getElementById('screenshotPreviewImg').src = uploadedScreenshotBase64;
+        document.getElementById('screenshotPreviewBox').classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function submitPaymentProof(e) {
+      e.preventDefault();
+      if (!pendingPaymentItem || !currentUser) return;
+
+      const utr = document.getElementById('inputPayUtr').value.trim();
+      if (!utr || utr.length !== 12) {
+        showToast("Please enter a valid 12-digit UPI UTR number.");
+        return;
+      }
+
+      if (!uploadedScreenshotBase64) {
+        showToast("Please attach the payment screenshot as proof.");
+        return;
+      }
+
+      const proofEntry = {
+        id: "proof_" + Date.now(),
+        studentName: currentUser.name,
+        studentPhone: currentUser.phone,
+        docId: pendingPaymentItem.id,
+        docTitle: pendingPaymentItem.title,
+        price: pendingPaymentItem.price,
+        utr: utr,
+        screenshotBase64: uploadedScreenshotBase64,
+        timestamp: Date.now(),
+        status: "pending"
+      };
+
+      paymentProofs.unshift(proofEntry);
+      saveStorage('payment_proofs', paymentProofs);
+
+      // Activate 12-Hour Provisional Access immediately
+      if (!currentUser.provisionalAccess) currentUser.provisionalAccess = {};
+      currentUser.provisionalAccess[pendingPaymentItem.id] = Date.now() + (PLATFORM_CONFIG.graceDurationHours * 3600 * 1000);
+      saveStorage('user', currentUser);
+
+      closePaymentModal();
+      showToast("Payment proof received! 12-Hour Provisional Full Access Activated.");
+      
+      checkActiveGracePeriods();
+      renderStoreCards();
+      renderMyLibraryList();
+
+      if (currentReadingDoc && currentReadingDoc.id === pendingPaymentItem.id) {
+        renderReaderPageContent();
+      }
+    }
+
+    function isProvisionalActive(docId) {
+      if (!currentUser || !currentUser.provisionalAccess || !currentUser.provisionalAccess[docId]) {
+        return false;
+      }
+      return Date.now() < currentUser.provisionalAccess[docId];
+    }
+
+    function checkActiveGracePeriods() {
+      if (!currentUser || !currentUser.provisionalAccess) {
+        document.getElementById('graceAccessAlertBar').classList.add('hidden');
+        return;
+      }
+
+      let activeDocId = null;
+      let minRemainingMs = Infinity;
+
+      Object.keys(currentUser.provisionalAccess).forEach(docId => {
+        const remaining = currentUser.provisionalAccess[docId] - Date.now();
+        if (remaining > 0 && remaining < minRemainingMs) {
+          minRemainingMs = remaining;
+          activeDocId = docId;
+        }
+      });
+
+      if (activeDocId && minRemainingMs > 0) {
+        const hh = String(Math.floor(minRemainingMs / 3600000)).padStart(2, '0');
+        const mm = String(Math.floor((minRemainingMs % 3600000) / 60000)).padStart(2, '0');
+        const ss = String(Math.floor((minRemainingMs % 60000) / 1000)).padStart(2, '0');
+
+        document.getElementById('graceCountdownTimer').innerText = `${hh}h ${mm}m ${ss}s`;
+        document.getElementById('graceAccessAlertBar').classList.remove('hidden');
+      } else {
+        document.getElementById('graceAccessAlertBar').classList.add('hidden');
+      }
+    }
+
+    /* ==========================================================
+       MY LIBRARY & ENROLLED VAULT
+       ========================================================== */
+    function renderMyLibraryList() {
+      const container = document.getElementById('myLibraryListContainer');
+      if (!container) return;
+
+      if (!currentUser) {
+        container.innerHTML = `
+          <div class="p-6 text-center text-xs text-slate-400 space-y-2">
+            <p>Please login to see your enrolled titles and reading progress.</p>
+            <button onclick="openAuthModal()" class="px-4 py-2 bg-cyan-500 text-slate-950 font-bold rounded-xl text-xs">Login Now</button>
+          </div>
+        `;
+        return;
+      }
+
+      const enrolledIds = currentUser.enrolledDocs || [];
+      const provisionalKeys = Object.keys(currentUser.provisionalAccess || {}).filter(k => isProvisionalActive(k));
+      const allActiveIds = Array.from(new Set([...enrolledIds, ...provisionalKeys]));
+
+      if (allActiveIds.length === 0) {
+        container.innerHTML = `
+          <div class="p-6 text-center text-xs text-slate-500 space-y-2">
+            <i class="fas fa-box-open text-2xl text-slate-600"></i>
+            <p>You have not enrolled in any full study packages yet.</p>
+            <button onclick="navigateToTab('store')" class="px-4 py-2 bg-slate-800 text-cyan-300 font-bold rounded-xl text-xs border border-slate-700">Browse Notes Vault</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = allActiveIds.map(id => {
+        const item = storeItems.find(d => d.id === id);
+        if (!item) return "";
+
+        const isPerm = enrolledIds.includes(id);
+
+        return `
+          <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center font-bold text-sm">
+                <i class="fas fa-file-shield"></i>
+              </div>
+              <div>
+                <h4 class="text-xs sm:text-sm font-bold text-white">${item.title}</h4>
+                <p class="text-[10px] text-slate-400">${item.pages} Pages • Anti-Piracy Watermarked</p>
+                <span class="inline-block mt-0.5 text-[9px] px-2 py-0.2 rounded font-bold ${isPerm ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'}">
+                  ${isPerm ? 'Verified Lifetime Access' : 'Provisional 12h Access Active'}
+                </span>
+              </div>
+            </div>
+
+            <button onclick="openSecureReader('${item.id}', 1)" class="px-3.5 py-2 bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-black text-xs rounded-xl transition shadow-md active:scale-95">
+              Read Now
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* ==========================================================
+       DAILY PRACTICE MCQS ENGINE
+       ========================================================== */
+    let currentQuizScore = 0;
+    const answeredTracker = {};
+
+    function renderQuizSection() {
+      const container = document.getElementById('quizQuestionsContainer');
+      if (!container) return;
+
+      container.innerHTML = mcqBank.map((mcq, idx) => `
+        <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-3" id="mcqBox_${mcq.id}">
+          <div class="flex items-start justify-between gap-2">
+            <span class="text-xs font-mono font-bold text-cyan-400">Q${idx + 1} of ${mcqBank.length}</span>
+            <span class="text-[10px] text-slate-500 font-mono">1 Mark</span>
+          </div>
+
+          <p class="text-xs sm:text-sm font-bold text-white leading-relaxed">
+            ${mcq.question}
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+            ${mcq.options.map((opt, optIdx) => `
+              <button onclick="handleOptionSelect('${mcq.id}',${optIdx})" id="optBtn_${mcq.id}_${optIdx}" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-left text-slate-300 transition">
+                <span class="font-bold mr-1 text-slate-500">${String.fromCharCode(65 + optIdx)}.</span>${opt}
+              </button>
+            `).join('')}
+          </div>
+
+          <!-- Explanation Box -->
+          <div id="explanation_${mcq.id}" class="hidden p-3 rounded-xl bg-cyan-950/30 border border-cyan-800/40 text-xs text-cyan-200">
+            <strong class="text-cyan-400 block mb-1">Detailed Solution:</strong>
+            <p>${mcq.explanation}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function handleOptionSelect(mcqId, selectedIdx) {
+      if (answeredTracker[mcqId] !== undefined) return;
+
+      const mcq = mcqBank.find(q => q.id === mcqId);
+      if (!mcq) return;
+
+      answeredTracker[mcqId] = selectedIdx;
+      const isCorrect = selectedIdx === mcq.correctIndex;
+      if (isCorrect) currentQuizScore++;
+
+      document.getElementById('quizScoreBadge').innerText = `Score: ${currentQuizScore} / ${mcqBank.length}`;
+
+      // Style options
+      for (let i = 0; i < mcq.options.length; i++) {
+        const btn = document.getElementById(`optBtn_${mcqId}_${i}`);
+        if (btn) {
+          if (i === mcq.correctIndex) {
+            btn.className = "p-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 font-bold text-left";
+          } else if (i === selectedIdx && !isCorrect) {
+            btn.className = "p-2.5 rounded-xl bg-rose-500/20 border border-rose-500/50 text-rose-300 text-left";
+          } else {
+            btn.className = "p-2.5 rounded-xl bg-slate-900/50 border border-slate-900 text-slate-500 text-left opacity-60";
+          }
+        }
+      }
+
+      document.getElementById(`explanation_${mcqId}`).classList.remove('hidden');
+    }
+
+    /* ==========================================================
+       HIDDEN ADMIN PANEL & VERIFICATION CONTROLS
+       ========================================================== */
+    function openAdminGatewayModal() {
+      document.getElementById('adminPanelModal').classList.remove('hidden');
+      document.getElementById('adminPasswordGate').classList.remove('hidden');
+      document.getElementById('adminDashboardContent').classList.add('hidden');
+      document.getElementById('adminSecretKeyInput').value = "";
+      document.getElementById('adminGateError').classList.add('hidden');
+    }
+
+    function closeAdminPanelModal() {
+      document.getElementById('adminPanelModal').classList.add('hidden');
+    }
+
+    function verifyAdminPassword() {
+      const pass = document.getElementById('adminSecretKeyInput').value.trim();
+      if (pass === PLATFORM_CONFIG.adminPass) {
+        document.getElementById('adminPasswordGate').classList.add('hidden');
+        document.getElementById('adminDashboardContent').classList.remove('hidden');
+        renderAdminDashboard();
+      } else {
+        document.getElementById('adminGateError').classList.remove('hidden');
+      }
+    }
+
+    function renderAdminDashboard() {
+      const pendingProofs = paymentProofs.filter(p => p.status === 'pending');
+      const approvedProofs = paymentProofs.filter(p => p.status === 'approved');
+
+      let revenue = 0;
+      approvedProofs.forEach(p => revenue += (p.price || 0));
+
+      document.getElementById('adminMetricPendingCount').innerText = pendingProofs.length;
+      document.getElementById('adminMetricApprovedCount').innerText = approvedProofs.length;
+      document.getElementById('adminMetricTotalRevenue').innerText = `₹${revenue}`;
+
+      const container = document.getElementById('adminProofQueueList');
+      if (paymentProofs.length === 0) {
+        container.innerHTML = `<div class="p-4 text-center text-xs text-slate-500 border border-slate-800 rounded-xl">No transaction proofs registered yet.</div>`;
+        return;
+      }
+
+      container.innerHTML = paymentProofs.map(p => `
+        <div class="p-3.5 rounded-2xl bg-slate-950 border ${p.status === 'pending' ? 'border-amber-500/40 bg-amber-950/10' : 'border-slate-800'} space-y-2">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <p class="text-xs font-bold text-white">${p.studentName} (+91 ${p.studentPhone})</p>
+              <p class="text-[11px] text-cyan-300 font-medium">${p.docTitle}</p>
+              <p class="text-[10px] text-slate-400 font-mono">UTR: <strong class="text-white">${p.utr}</strong> • Amount: <strong>₹${p.price}</strong></p>
+            </div>
+            <span class="text-[9px] px-2 py-0.5 rounded font-bold uppercase ${p.status === 'approved' ? 'bg-emerald-500/20 text-emerald-300' : (p.status === 'rejected' ? 'bg-rose-500/20 text-rose-300' : 'bg-amber-500/20 text-amber-300')}">
+              ${p.status}
+            </span>
+          </div>
+
+          <!-- Screenshot Preview -->
+          ${p.screenshotBase64 ? `
+            <div class="p-1.5 bg-slate-900 rounded-xl inline-block border border-slate-800">
+              <img src="${p.screenshotBase64}" alt="Receipt" class="h-24 w-auto rounded object-cover cursor-pointer" onclick="window.open('${p.screenshotBase64}')">
+            </div>
+          ` : ''}
+
+          ${p.status === 'pending' ? `
+            <div class="flex items-center gap-2 pt-1 border-t border-slate-900">
+              <button onclick="adminApproveProof('${p.id}')" class="flex-1 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition">
+                <i class="fas fa-check mr-1"></i> Approve & Grant Lifetime
+              </button>
+              <button onclick="adminRejectProof('${p.id}')" class="py-1.5 px-3 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 font-semibold text-xs rounded-xl border border-rose-500/40 transition">
+                Reject
+              </button>
+            </div>
+          ` : ''}
+        </div>
+      `).join('');
+    }
+
+    function adminApproveProof(proofId) {
+      const proof = paymentProofs.find(p => p.id === proofId);
+      if (!proof) return;
+
+      proof.status = 'approved';
+      saveStorage('payment_proofs', paymentProofs);
+
+      // If active user is the student, grant permanent access
+      if (currentUser && currentUser.phone === proof.studentPhone) {
+        if (!currentUser.enrolledDocs) currentUser.enrolledDocs = [];
+        if (!currentUser.enrolledDocs.includes(proof.docId)) {
+          currentUser.enrolledDocs.push(proof.docId);
+        }
+        saveStorage('user', currentUser);
+      }
+
+      showToast(`Approved! Permanent access granted to ${proof.studentName}.`);
+      renderAdminDashboard();
+      renderStoreCards();
+      renderMyLibraryList();
+    }
+
+    function adminRejectProof(proofId) {
+      const proof = paymentProofs.find(p => p.id === proofId);
+      if (!proof) return;
+
+      if (confirm("Are you sure you want to reject this payment proof?")) {
+        proof.status = 'rejected';
+        saveStorage('payment_proofs', paymentProofs);
+
+        // Revoke grace access
+        if (currentUser && currentUser.phone === proof.studentPhone && currentUser.provisionalAccess) {
+          delete currentUser.provisionalAccess[proof.docId];
+          saveStorage('user', currentUser);
+        }
+
+        showToast("Payment proof rejected.");
+        renderAdminDashboard();
+        renderStoreCards();
+        renderMyLibraryList();
+      }
+    }
+
+    function exportPlatformDataBackup() {
+      const dump = {
+        platform: PLATFORM_CONFIG.name,
+        exportedAt: new Date().toISOString(),
+        paymentProofs,
+        storeItems,
+        affairsFeed
+      };
+
+      const blob = new Blob([JSON.stringify(dump, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `TargetCrack_Backup_${Date.now()}.json`;
+      a.click();
+    }
+
+    /* ==========================================================
+       UTILITY: INTERACTIVE TOAST NOTIFICATIONS
+       ========================================================== */
+    function showToast(msg) {
+      const existing = document.getElementById('tcToastNotification');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'tcToastNotification';
+      toast.className = "fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-slate-900 border border-cyan-500/50 text-white text-xs px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-2 max-w-sm w-auto text-center animate-bounce";
+      toast.innerHTML = `<i class="fas fa-circle-info text-cyan-400"></i> <span>${msg}</span>`;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
